@@ -11,8 +11,16 @@
  * For ([1, 2, 3], 2) should return 1
  *
  */
-function findIndex(/* array, value */) {
-  throw new Error('Not implemented');
+function findIndex(array, value) {
+  const idx = [];
+  array.filter((element, index) => {
+    if (element === value) {
+      idx.push(index);
+      return true;
+    }
+    return false;
+  });
+  return +idx.join('');
 }
 
 module.exports = findIndex;

@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /**
  * In the popular Minesweeper game you have a board with some mines and those cells
  * that don't contain a mine have a number in it that indicates the total number of mines
@@ -14,15 +15,48 @@
  *  [false, false, false]
  * ]
  *
- * The result should be following:
+ * The element should be following:
  * [
  *  [1, 2, 1],
  *  [2, 1, 1],
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const result = [];
+  for (let i = 0; i < matrix.length; i++) {
+    const newArr = [];
+    for (let j = 0; j < matrix[i].length; j++) {
+      let element = 0;
+      if (i !== 0 && matrix[i - 1][j]) {
+        element += 1;
+      }
+      if (i !== matrix.length - 1 && matrix[i + 1][j]) {
+        element += 1;
+      }
+      if (j !== 0 && matrix[i][j - 1]) {
+        element += 1;
+      }
+      if (j !== matrix[i].length - 1 && matrix[i][j + 1]) {
+        element += 1;
+      }
+      if (i !== 0 && j !== 0 && matrix[i - 1][j - 1]) {
+        element += 1;
+      }
+      if (i !== matrix.length - 1 && j !== matrix[i].length - 1 && matrix[i + 1][j + 1]) {
+        element += 1;
+      }
+      if (i !== matrix.length - 1 && j !== 0 && matrix[i + 1][j - 1]) {
+        element += 1;
+      }
+      if (j !== matrix[i].length - 1 && i !== 0 && matrix[i - 1][j + 1]) {
+        element += 1;
+      }
+      newArr.push(element);
+    }
+    result.push(newArr);
+  }
+  return result;
 }
 
 module.exports = minesweeper;
