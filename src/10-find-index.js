@@ -1,9 +1,9 @@
 /**
- * Given a sorted array, find the index of the element with the given value.
+ * Given a sorted array, find the index of the element with the given result.
  * Time complexity should be O(logN)
  *
  * @param {Array} array
- * @param {Number} value
+ * @param {Number} result
  * @return {Number}
  *
  * @example
@@ -12,15 +12,21 @@
  *
  */
 function findIndex(array, value) {
-  const idx = [];
-  array.filter((element, index) => {
-    if (element === value) {
-      idx.push(index);
-      return true;
+  let start = 0;
+  let end = array.length - 1;
+  while (start <= end) {
+    const middle = parseInt((end + start) / 2, 10);
+    const result = array[middle];
+    if (result === value) {
+      return middle;
     }
-    return false;
-  });
-  return +idx.join('');
+    if (result > value) {
+      end = middle - 1;
+    } else {
+      start = middle + 1;
+    }
+  }
+  return null;
 }
 
 module.exports = findIndex;

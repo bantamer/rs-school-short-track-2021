@@ -13,10 +13,20 @@
  * the output should be ["fileList", "fileList(1)", "image", "fileList(1)(1)", "fileList(2)"]
  *
  */
-function renamefileLists(/* names */) {
-  throw new Error('Not implemented');
+function renamefileLists(names) {
+  const listFiles = {};
+  const result = [];
+  for (let i = 0; i < names.length; i++) {
+    if (listFiles[names[i]] === undefined) {
+      listFiles[names[i]] = 1;
+      result.push(names[i]);
+    } else {
+      listFiles[names[i]] += 1;
+      listFiles[`${names[i]}(${listFiles[names[i]] - 1})`] = 1;
+      result.push(`${names[i]}(${listFiles[names[i]] - 1})`);
+    }
+  }
+  return result;
 }
-
-// console.log(renamefileLists(['fileList', 'fileList', 'image', 'fileList(1)', 'fileList']));
 
 module.exports = renamefileLists;
